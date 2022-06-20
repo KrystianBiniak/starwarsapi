@@ -1,4 +1,7 @@
 package pl.biniak.starwarsapi.repository;
 
-public class StarshipRepo {
+import org.springframework.data.repository.CrudRepository;
+import pl.biniak.starwarsapi.entity.Starship;
+
+public interface StarshipRepo extends CrudRepository<Starship, Long> {
 }
