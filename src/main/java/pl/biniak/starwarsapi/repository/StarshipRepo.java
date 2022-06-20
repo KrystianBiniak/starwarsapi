@@ -1,7 +1,11 @@
 package pl.biniak.starwarsapi.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import pl.biniak.starwarsapi.entity.Starship;
 
-public interface StarshipRepo extends CrudRepository<Starship, Long> {
+import java.util.List;
+
+@Repository
+public interface StarshipRepo extends CrudRepository<List<Starship>, Long> {
 }
