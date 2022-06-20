@@ -17,26 +17,25 @@ public class MovieCharacter {
   private long height;
   private long mass;
   private HairColor hairColor;
-  /*@ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @NotFound(action = NotFoundAction.IGNORE)
-  @JoinColumn(name = "homeworld", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private HomeWorld homeWorld;
-  @ManyToMany
+  @ElementCollection
   @NotFound(action = NotFoundAction.IGNORE)
-  @JoinColumn(name = "starships", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-  private List<Starship> starships;*/
+  @CollectionTable(name = "STARSHIPS_ID", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
+  private List<Starship> starships;
 
   public MovieCharacter() {
   }
 
-  public MovieCharacter(long id, String name, long height, long mass, HairColor hairColor/*, HomeWorld homeWorld, List<Starship> starships*/) {
+  public MovieCharacter(long id, String name, long height, long mass, HairColor hairColor, HomeWorld homeWorld, List<Starship> starships) {
     this.id = id;
     this.name = name;
     this.height = height;
     this.mass = mass;
     this.hairColor = hairColor;
-    //this.homeWorld = homeWorld;
-    //this.starships = starships;
+    this.homeWorld = homeWorld;
+    this.starships = starships;
   }
 
   public long getId() {
@@ -79,7 +78,15 @@ public class MovieCharacter {
     this.hairColor = hairColor;
   }
 
-  /*public HomeWorld getHomeWorld() {
+  public void setHeight(long height) {
+    this.height = height;
+  }
+
+  public void setMass(long mass) {
+    this.mass = mass;
+  }
+
+  public HomeWorld getHomeWorld() {
     return homeWorld;
   }
 
@@ -93,5 +100,5 @@ public class MovieCharacter {
 
   public void setStarships(List<Starship> starships) {
     this.starships = starships;
-  }*/
+  }
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.biniak.starwarsapi.entity.Starship;
 import pl.biniak.starwarsapi.repository.StarshipRepo;
 
+import java.util.List;
+
 @Service
 public class StarshipManager {
 

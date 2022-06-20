@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class HomeWorld {
 
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private long id;
   private String name;
