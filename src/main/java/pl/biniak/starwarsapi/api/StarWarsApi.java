@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.biniak.starwarsapi.entity.MovieCharacter;
 import pl.biniak.starwarsapi.service.CharacterManager;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RestController
@@ -26,8 +27,13 @@ public class StarWarsApi {
     return characterManager.findAll();
   }
 
-  @GetMapping
+  @GetMapping("/{id}")
   public Optional<MovieCharacter> getByID(@RequestParam long id) {
     return characterManager.findByID(id);
+  }
+
+  @GetMapping
+  public Iterable<MovieCharacter> getPage(@RequestParam long page) {
+    return characterManager.findPage(page);
   }
 }
