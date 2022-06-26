@@ -55,18 +55,14 @@ public class CharacterManager {
 
   @EventListener(ApplicationReadyEvent.class)
   public boolean fillDB() throws IOException {
-    int id = 1;
     RestTemplate restTemplate = new RestTemplate();
+    int characterID = 1;
+
     do {
-      if(id == 17) {
+      if (characterID == 17) {
         continue;
       }
-      String currentUrl = "https://swapi.dev/api/people/" + id + "?format=json";
-
-      // OTHER SOLUTION //
-      /*URL url = new URL(currentUrl);
-      InputStreamReader inputStreamReader = new InputStreamReader(url.openStream());
-      MovieCharacter movieCharacter = new Gson().fromJson(inputStreamReader, MovieCharacter.class);*/
+      String currentUrl = "https://swapi.dev/api/people/" + characterID + "?format=json";
 
       MovieCharacter movieCharacter = restTemplate.exchange(
           currentUrl,
@@ -74,7 +70,7 @@ public class CharacterManager {
           HttpEntity.EMPTY,
           MovieCharacter.class
       ).getBody();
-      if(movieCharacter != null) {
+      if (movieCharacter != null) {
         save(movieCharacter);
         homeWorldManager.loadFromURL(movieCharacter.getHomeworld());
         starshipManager.loadFromURL(movieCharacter.getStarships());
@@ -82,8 +78,8 @@ public class CharacterManager {
         filmManager.loadFromURL(movieCharacter.getFilms());
         speciesManager.loadFromURL(movieCharacter.getSpecies());
       }
-      id++;
-    } while (id < 50);
+      characterID++;
+    } while (characterID <= 100);
     return true;
   }
 }
