@@ -37,6 +37,11 @@ public class SpringSecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.csrf().
+        disable();
+    httpSecurity.headers()
+        .frameOptions()
+        .disable();
     httpSecurity.authorizeRequests()
         .antMatchers("/swagger-ui.html").permitAll()
         .antMatchers("/swagger-ui.html/**").hasRole("ADMIN")
@@ -44,7 +49,10 @@ public class SpringSecurityConfig {
         .antMatchers("/v2/api-docs").permitAll()
         .antMatchers("/webjars/**").permitAll()
         .antMatchers("/characters/**").permitAll()
-        .antMatchers("/console/**").permitAll();
+        .antMatchers("/health").permitAll()
+        .antMatchers("/metrics").permitAll()
+        .antMatchers("/actuator").permitAll()
+        .anyRequest().authenticated();
     httpSecurity
         .formLogin()
         .permitAll();

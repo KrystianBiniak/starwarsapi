@@ -5,40 +5,41 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pl.biniak.starwarsapi.entity.Starship;
-import pl.biniak.starwarsapi.repository.StarshipRepo;
+import pl.biniak.starwarsapi.entity.Film;
+import pl.biniak.starwarsapi.repository.FilmRepo;
 
 import java.util.List;
 
 @Service
-public class StarshipManager {
+public class FilmManager {
 
-  private StarshipRepo starshipRepo;
+  private FilmRepo filmRepo;
 
   @Autowired
-  public StarshipManager(StarshipRepo starshipRepo) {
-    this.starshipRepo = starshipRepo;
+  public FilmManager(FilmRepo filmRepo) {
+    this.filmRepo = filmRepo;
   }
 
-  public Starship save(Starship starship) {
-    return starshipRepo.save(starship);
+  public Film save(Film film) {
+    return filmRepo.save(film);
   }
 
-  public Iterable<Starship> findAll() {
-    return starshipRepo.findAll();
+  public Iterable<Film> findAll() {
+    return filmRepo.findAll();
   }
 
   public boolean loadFromURL(List<String> urls) {
     RestTemplate restTemplate = new RestTemplate();
     urls.forEach(url ->
-        save (
+        save(
             restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
-                Starship.class
+                Film.class
             ).getBody()
         ));
+
     return true;
   }
 }

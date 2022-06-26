@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity
 @Generated("jsonschema2pojo")
-public class Starship {
+public class Vehicle {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
@@ -44,15 +44,9 @@ public class Starship {
   @SerializedName("consumables")
   @Expose
   private String consumables;
-  @SerializedName("hyperdrive_rating")
+  @SerializedName("vehicle_class")
   @Expose
-  private String hyperdriveRating;
-  @SerializedName("MGLT")
-  @Expose
-  private String mglt;
-  @SerializedName("starship_class")
-  @Expose
-  private String starshipClass;
+  private String vehicleClass;
   @SerializedName("pilots")
   @Expose
   @ElementCollection
@@ -73,10 +67,10 @@ public class Starship {
   @Expose
   private String url;
 
-  public Starship() {
+  public Vehicle() {
   }
 
-  public Starship(String name, String model, String manufacturer, String costInCredits, String length, String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables, String hyperdriveRating, String mglt, String starshipClass, List<String> pilots, List<String> films, String created, String edited, String url) {
+  public Vehicle(String name, String model, String manufacturer, String costInCredits, String length, String maxAtmospheringSpeed, String crew, String passengers, String cargoCapacity, String consumables, String vehicleClass, List<String> pilots, List<String> films, String created, String edited, String url) {
     this.name = name;
     this.model = model;
     this.manufacturer = manufacturer;
@@ -87,9 +81,7 @@ public class Starship {
     this.passengers = passengers;
     this.cargoCapacity = cargoCapacity;
     this.consumables = consumables;
-    this.hyperdriveRating = hyperdriveRating;
-    this.mglt = mglt;
-    this.starshipClass = starshipClass;
+    this.vehicleClass = vehicleClass;
     this.pilots = pilots;
     this.films = films;
     this.created = created;
@@ -185,28 +177,12 @@ public class Starship {
     this.consumables = consumables;
   }
 
-  public String getHyperdriveRating() {
-    return hyperdriveRating;
+  public String getVehicleClass() {
+    return vehicleClass;
   }
 
-  public void setHyperdriveRating(String hyperdriveRating) {
-    this.hyperdriveRating = hyperdriveRating;
-  }
-
-  public String getMglt() {
-    return mglt;
-  }
-
-  public void setMglt(String mglt) {
-    this.mglt = mglt;
-  }
-
-  public String getStarshipClass() {
-    return starshipClass;
-  }
-
-  public void setStarshipClass(String starshipClass) {
-    this.starshipClass = starshipClass;
+  public void setVehicleClass(String vehicleClass) {
+    this.vehicleClass = vehicleClass;
   }
 
   public List<String> getPilots() {
@@ -252,7 +228,7 @@ public class Starship {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(Starship.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+    sb.append(Species.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
     sb.append("name");
     sb.append('=');
     sb.append(((this.name == null) ? "<null>" : this.name));
@@ -293,17 +269,9 @@ public class Starship {
     sb.append('=');
     sb.append(((this.consumables == null) ? "<null>" : this.consumables));
     sb.append(',');
-    sb.append("hyperdriveRating");
+    sb.append("vehicleClass");
     sb.append('=');
-    sb.append(((this.hyperdriveRating == null) ? "<null>" : this.hyperdriveRating));
-    sb.append(',');
-    sb.append("mglt");
-    sb.append('=');
-    sb.append(((this.mglt == null) ? "<null>" : this.mglt));
-    sb.append(',');
-    sb.append("starshipClass");
-    sb.append('=');
-    sb.append(((this.starshipClass == null) ? "<null>" : this.starshipClass));
+    sb.append(((this.vehicleClass == null) ? "<null>" : this.vehicleClass));
     sb.append(',');
     sb.append("pilots");
     sb.append('=');

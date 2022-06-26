@@ -1,21 +1,5 @@
 package pl.biniak.starwarsapi.entity;
 
-
-//@Entity
-
-  //@GeneratedValue(strategy = GenerationType.AUTO)
-  //@Id
-  //private long id;
-
-
-  //@ManyToOne
-  //@NotFound(action = NotFoundAction.IGNORE)
-  //private HomeWorld homeWorld;
-  //@ElementCollection
-  //@NotFound(action = NotFoundAction.IGNORE)
-  //@CollectionTable(name = "STARSHIPS_ID", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
-  //private List<Starship> starships;
-
 import java.util.List;
 import javax.annotation.Generated;
 import javax.persistence.*;
@@ -27,10 +11,11 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class MovieCharacter {
 
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+  private long id;
   @SerializedName("name")
   @Expose
-  @Id
-  //@Column(name = "name", nullable = false)
   private String name;
   @SerializedName("height")
   @Expose
@@ -59,25 +44,21 @@ public class MovieCharacter {
   @SerializedName("films")
   @Expose
   @ElementCollection
-  @CollectionTable(name = "films", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
   @Column(name = "film")
   private List<String> films = null;
   @SerializedName("species")
   @Expose
   @ElementCollection
-  @CollectionTable(name = "species", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
   @Column(name = "specie")
   private List<String> species = null;
   @SerializedName("vehicles")
   @Expose
   @ElementCollection
-  @CollectionTable(name = "vehicles", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
   @Column(name = "vehicle")
   private List<String> vehicles = null;
   @SerializedName("starships")
   @Expose
   @ElementCollection
-  @CollectionTable(name = "starships", joinColumns = @JoinColumn(name = "MOVIE_CHARACTER_ID"))
   @Column(name = "starship")
   private List<String> starships = null;
   @SerializedName("created")
@@ -110,6 +91,14 @@ public class MovieCharacter {
     this.created = created;
     this.edited = edited;
     this.url = url;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -246,70 +235,70 @@ public class MovieCharacter {
     sb.append(MovieCharacter.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
     sb.append("name");
     sb.append('=');
-    sb.append(((this.name == null)?"<null>":this.name));
+    sb.append(((this.name == null) ? "<null>" : this.name));
     sb.append(',');
     sb.append("height");
     sb.append('=');
-    sb.append(((this.height == null)?"<null>":this.height));
+    sb.append(((this.height == null) ? "<null>" : this.height));
     sb.append(',');
     sb.append("mass");
     sb.append('=');
-    sb.append(((this.mass == null)?"<null>":this.mass));
+    sb.append(((this.mass == null) ? "<null>" : this.mass));
     sb.append(',');
     sb.append("hairColor");
     sb.append('=');
-    sb.append(((this.hairColor == null)?"<null>":this.hairColor));
+    sb.append(((this.hairColor == null) ? "<null>" : this.hairColor));
     sb.append(',');
     sb.append("skinColor");
     sb.append('=');
-    sb.append(((this.skinColor == null)?"<null>":this.skinColor));
+    sb.append(((this.skinColor == null) ? "<null>" : this.skinColor));
     sb.append(',');
     sb.append("eyeColor");
     sb.append('=');
-    sb.append(((this.eyeColor == null)?"<null>":this.eyeColor));
+    sb.append(((this.eyeColor == null) ? "<null>" : this.eyeColor));
     sb.append(',');
     sb.append("birthYear");
     sb.append('=');
-    sb.append(((this.birthYear == null)?"<null>":this.birthYear));
+    sb.append(((this.birthYear == null) ? "<null>" : this.birthYear));
     sb.append(',');
     sb.append("gender");
     sb.append('=');
-    sb.append(((this.gender == null)?"<null>":this.gender));
+    sb.append(((this.gender == null) ? "<null>" : this.gender));
     sb.append(',');
     sb.append("homeworld");
     sb.append('=');
-    sb.append(((this.homeworld == null)?"<null>":this.homeworld));
+    sb.append(((this.homeworld == null) ? "<null>" : this.homeworld));
     sb.append(',');
     sb.append("films");
     sb.append('=');
-    sb.append(((this.films == null)?"<null>":this.films));
+    sb.append(((this.films == null) ? "<null>" : this.films));
     sb.append(',');
     sb.append("species");
     sb.append('=');
-    sb.append(((this.species == null)?"<null>":this.species));
+    sb.append(((this.species == null) ? "<null>" : this.species));
     sb.append(',');
     sb.append("vehicles");
     sb.append('=');
-    sb.append(((this.vehicles == null)?"<null>":this.vehicles));
+    sb.append(((this.vehicles == null) ? "<null>" : this.vehicles));
     sb.append(',');
     sb.append("starships");
     sb.append('=');
-    sb.append(((this.starships == null)?"<null>":this.starships));
+    sb.append(((this.starships == null) ? "<null>" : this.starships));
     sb.append(',');
     sb.append("created");
     sb.append('=');
-    sb.append(((this.created == null)?"<null>":this.created));
+    sb.append(((this.created == null) ? "<null>" : this.created));
     sb.append(',');
     sb.append("edited");
     sb.append('=');
-    sb.append(((this.edited == null)?"<null>":this.edited));
+    sb.append(((this.edited == null) ? "<null>" : this.edited));
     sb.append(',');
     sb.append("url");
     sb.append('=');
-    sb.append(((this.url == null)?"<null>":this.url));
+    sb.append(((this.url == null) ? "<null>" : this.url));
     sb.append(',');
-    if (sb.charAt((sb.length()- 1)) == ',') {
-      sb.setCharAt((sb.length()- 1), ']');
+    if (sb.charAt((sb.length() - 1)) == ',') {
+      sb.setCharAt((sb.length() - 1), ']');
     } else {
       sb.append(']');
     }
