@@ -23,6 +23,7 @@ public class CharacterManager {
   private SpeciesManager speciesManager;
   private VehicleManager vehicleManager;
 
+  @Autowired
   public CharacterManager(CharacterRepo characterRepo, HomeWorldManager homeWorldManager, StarshipManager starshipManager, FilmManager filmManager, SpeciesManager speciesManager, VehicleManager vehicleManager) {
     this.characterRepo = characterRepo;
     this.homeWorldManager = homeWorldManager;
@@ -32,8 +33,8 @@ public class CharacterManager {
     this.vehicleManager = vehicleManager;
   }
 
-  @Autowired
-
+  public CharacterManager() {
+  }
 
   public Iterable<MovieCharacter> findAll() {
     return characterRepo.findAll();
@@ -53,6 +54,21 @@ public class CharacterManager {
     return characterRepo.save(movieCharacter);
   }
 
+  public MovieCharacter loadFromURL(String url) {
+    RestTemplate restTemplate = new RestTemplate();
+    try {
+      return restTemplate.exchange(
+          url,
+          HttpMethod.GET,
+          HttpEntity.EMPTY,
+          MovieCharacter.class
+      ).getBody();
+    } catch (Exception exception) {
+      exception.printStackTrace();
+      return null;
+    }
+  }
+
   @EventListener(ApplicationReadyEvent.class)
   public boolean fillDB() throws IOException {
     RestTemplate restTemplate = new RestTemplate();
@@ -64,12 +80,7 @@ public class CharacterManager {
       }
       String currentUrl = "https://swapi.dev/api/people/" + characterID + "?format=json";
 
-      MovieCharacter movieCharacter = restTemplate.exchange(
-          currentUrl,
-          HttpMethod.GET,
-          HttpEntity.EMPTY,
-          MovieCharacter.class
-      ).getBody();
+      MovieCharacter movieCharacter = loadFromURL(currentUrl);
       if (movieCharacter != null) {
         save(movieCharacter);
         homeWorldManager.loadFromURL(movieCharacter.getHomeworld());
